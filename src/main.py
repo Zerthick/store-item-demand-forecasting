@@ -1,17 +1,20 @@
 import os
 from fastapi import FastAPI, HTTPException
-
-from provider.met_provider import MetProvider
-from service.search_service import SearchService
+from provider.mlflow_provider import MLFlowProvider
+from service.forecast_service import ForecastService
 from shared.config.config_loader import load_config_settings
+from shared.view.request_view import ForecastRequest
+from shared.view.response_view import ForecastResponse
+from pydantic.errors import PydanticValidationError
+import httpx
 
 app = FastAPI()
 app_settings = load_config_settings(os.getenv('ENV', 'dev'))
-search_service = SearchService(MetProvider(app_settings.met_api_url))
+forecast_service = ForecastService(MLFlowProvider(app_settings.met_api_url))
 
 
-@app.get('/api/search')
-def search(title: str) -> str:
+@app.post('/v1/api/predict')
+def search(request: ForecastRequest) -> ForecastResponse:
     """Executes a search against the Metropolitan Museum of Art API and returns the url of the primary image of the first search result.
 
     Args:
@@ -22,7 +25,9 @@ def search(title: str) -> str:
     """
 
     try:
-        search_result = search_service.search_by_title(title)
-        return search_result.primary_image
-    except ValueError:
-        raise HTTPException(status_code=404, detail='No results found.')
+        forecast_result = forecast_service.forecast_sales(request)
+        return ForecastResponse.model_validate(forecast_result)
+    except PydanticValidationError as e:
+        raise HTTPException(status_code=422, detail=e.json())
+    except httpx.HTTPStatusError as e:
+        raise HTTPException(status_code=e.response.status_code, detail=e.response.text)
