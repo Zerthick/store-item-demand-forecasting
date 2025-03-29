@@ -1,0 +1,118 @@
+{
+	"info": {
+		"_postman_id": "bdd35f87-8dcc-4b9f-8730-8acb7ad9a818",
+		"name": "Store Item Demand Forecasting",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "12440976"
+	},
+	"item": [
+		{
+			"name": "Model Requests",
+			"item": [
+				{
+					"name": "Model Health Check",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/health",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"health"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Model Prediction",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"dataframe_split\": {\r\n        \"index\": [\r\n            771292\r\n        ],\r\n        \"columns\": [\r\n            \"store\",\r\n            \"item\",\r\n            \"month\",\r\n            \"day\",\r\n            \"year\"\r\n        ],\r\n        \"data\": [\r\n            [\r\n                1,\r\n                1,\r\n                1,\r\n                1,\r\n                2013\r\n            ]\r\n        ]\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/invocations",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"invocations"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Service Requests",
+			"item": [
+				{
+					"name": "Service Health Check",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:80/v1/api/health",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "80",
+							"path": [
+								"v1",
+								"api",
+								"health"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Service Prediction",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"date\": \"2013-01-01\",\r\n    \"store\": 1,\r\n    \"item\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:80/v1/api/predict",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "80",
+							"path": [
+								"v1",
+								"api",
+								"predict"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

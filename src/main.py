@@ -15,13 +15,13 @@ forecast_service = ForecastService(MLFlowProvider(app_settings.model_api_url))
 
 @app.post('/v1/api/predict')
 def predict(request: ForecastRequest) -> ForecastResponse:
-    """Executes a search against the Metropolitan Museum of Art API and returns the url of the primary image of the first search result.
+    """Predicts the sales for a given item in a specific store on a specific date.
 
     Args:
-        title: The title of the work you wish to search for.
+        request: A ForecastRequest object containing the date, store, and item for which to predict sales.
 
     Returns:
-        The url of the primary image of the first search result or 'No results found.' if no search results are found.
+        A ForecastResponse object containing the predicted sales.
     """
 
     try:
