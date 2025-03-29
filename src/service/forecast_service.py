@@ -41,4 +41,4 @@ class ForecastService:
             ]
         )
         forecast_result = self.mlflow_provider.predict(input_data)
-        return ForecastResult.model_validate(forecast_result)
+        return ForecastResult(predicted_sales=forecast_result.predictions[0])
