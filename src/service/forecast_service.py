@@ -42,3 +42,11 @@ class ForecastService:
         )
         forecast_result = self.mlflow_provider.predict(input_data)
         return ForecastResult(predicted_sales=forecast_result.predictions[0])
+
+    def health_check(self) -> bool:
+        """Checks the health of the MLFlow inference server.
+
+        Returns:
+            True if the server is healthy, False otherwise.
+        """
+        return self.mlflow_provider.health_check()
