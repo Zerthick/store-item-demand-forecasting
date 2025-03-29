@@ -45,4 +45,4 @@ def health_check() -> dict:
     if is_healthy:
         return {'status': 'healthy'}
     else:
-        raise HTTPException(status_code=503, detail='Service Unavailable')
+        raise HTTPException(status_code=503, detail='Service unavailable')

@@ -2336,7 +2336,7 @@ requires-dist = [
     { name = "fastapi", extras = ["standard"], specifier = ">=0.115.6" },
     { name = "httpx", specifier = ">=0.28.1" },
     { name = "lightgbm", specifier = ">=4.6.0" },
-    { name = "mlflow", extras = ["server"], specifier = ">=2.21.2" },
+    { name = "mlflow", specifier = ">=2.21.2" },
     { name = "numpy", specifier = ">=2.2.4" },
     { name = "pandas", specifier = ">=2.2.3" },
     { name = "pydantic-settings", specifier = ">=2.7.1" },

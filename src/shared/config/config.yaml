@@ -6,6 +6,8 @@ dev:
 
 qa:
   <<: *default
+  model_api_url: http://model:8080
 
 prod:
   <<: *default
+  model_api_url: http://model:8080

@@ -1,0 +1,9 @@
+services:
+  web:
+    build: .
+    ports:
+      - "80:80"
+    environment:
+      - ENV=prod
+  model:
+    image: lgbm-model:latest
