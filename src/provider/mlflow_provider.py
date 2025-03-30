@@ -21,11 +21,11 @@ class MLFlowProvider:
             input_data: The input data for the prediction.
 
         Returns:
-            The prediction response as a dictionary or None if the request fails.
+            The model's prediction response.
 
         Raises:
             HTTPStatusError: If the request to the inference server fails.
-            PydanticValidationError: If the response cannot be validated against the MLFlowResponse model.
+            ValidationError: If the response cannot be validated against the MLFlowResponse model.
         """
 
         payload = {'dataframe_split': input_data.to_dict(orient='split')}

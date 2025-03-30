@@ -38,8 +38,9 @@ def health_check() -> dict:
     """Checks the health of the Service, including any dependencies.
 
     Returns:
-        A dictionary indicating the health status of the server.
+        A dictionary indicating the health status of the service if healthy otherwise a 503 response.
     """
+
     is_healthy = forecast_service.health_check()
 
     if is_healthy:

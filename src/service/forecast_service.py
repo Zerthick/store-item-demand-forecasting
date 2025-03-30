@@ -8,24 +8,24 @@ class ForecastService:
     """A service for forecasting item sales.
 
     Args:
-        met_provider: A client for an MLFlow Model which will produce the forecast.
+        mlflow_provider: A client for an MLFlow Model which will produce the forecast.
     """
 
     def __init__(self, mlflow_provider: MLFlowProvider):
         self.mlflow_provider = mlflow_provider
 
     def forecast_sales(self, forecast_request: ForecastRequest) -> ForecastResult:
-        """Searches the Metropolitan Museum of Art API by title.
+        """Predicts the sales for a given item in a specific store on a specific date.
 
         Args:
-            forecast_request: A ForecastRequest object containing the title of the work to search for.
+            forecast_request: A ForecastRequest object containing the date, store, and item for which to predict sales.
 
         Returns:
             The forecasted sales.
 
         Raises:
             HTTPStatusError: If the request to the MLFlow inference server fails.
-            PydanticValidationError: If the response cannot be validated against the ForecastResult model.
+            ValidationError: If the response cannot be validated against the ForecastResult model.
         """
 
         # Feature engineering

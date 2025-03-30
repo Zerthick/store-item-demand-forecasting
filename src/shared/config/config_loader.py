@@ -6,10 +6,26 @@ from pydantic_settings import BaseSettings, PydanticBaseSettingsSource, Settings
 
 
 class Settings(BaseModel):
+    """Settings class for the application.
+
+    Args:
+        model_api_url: URL for the MLFlow model API.
+    """
+
     model_api_url: str
 
 
 class Config(BaseSettings):
+    """Config class to load settings from various sources.
+
+    Args:
+        default: Default settings.
+        dev: Development settings.
+        qa: QA settings.
+        prod: Production settings.
+        model_config: Configuration for the settings model.
+    """
+
     default: Settings
     dev: Settings
     qa: Settings
@@ -34,7 +50,16 @@ class Config(BaseSettings):
         )
 
 
-@lru_cache
+@lru_cache  # Cache the loaded settings for better performance
 def load_config_settings(env: str) -> Settings:
+    """Load configuration settings based on the environment.
+
+    Args:
+        env: The environment for which to load settings (e.g., 'dev', 'qa', 'prod').
+
+    Returns:
+        Settings: The loaded settings for the specified environment.
+    """
+
     appconfig = Config()  # type: ignore
     return getattr(appconfig, env)
