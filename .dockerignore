@@ -6,7 +6,7 @@ data
 deployment
 docs
 notebooks
-test
+tests
 .env
 .gitignore
 compose.yaml
